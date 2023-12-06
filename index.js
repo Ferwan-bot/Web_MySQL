@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 
-import { engine } from 'express-handlebars';
+const { engine } = require ('express-handlebars');
 
 
 app.engine('handlebars', engine());
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.listen(3000);
+app.listen(3001);
  
 
 
