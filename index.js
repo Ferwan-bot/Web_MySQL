@@ -3,7 +3,8 @@ const app = express()
 
 const mysql = require('mysql');
 var connection = mysql.createConnection({
-    password: 'password',
+  user:'root',
+    password: 'root',
   database : 'test'
 });
  
@@ -18,19 +19,17 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 app.get('/', (req, res) => {
-    res.render('home');
+  console.log('enter')
+  connection.query('SELECT * FROM computer', function (error, results, fields) {
+      if (error) throw error;
+      console.log(results);
+      res.render('home',{ results})
+    });
+
 });
 
 app.listen(3001);
  
 
 
-app.get('/', function (req, res) {
-    connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-        if (error) throw error;
-        console.log('The solution is: ', results[0].solution);
-      });
-  res.send('Hello World')
-})
-
-app.listen(3000)
+console.log('Listen: http://localhost:3001')
